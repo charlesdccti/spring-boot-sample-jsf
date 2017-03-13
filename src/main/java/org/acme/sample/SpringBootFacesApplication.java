@@ -1,34 +1,30 @@
 package org.acme.sample;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.faces.application.ProjectStage;
-import javax.servlet.ServletContainerInitializer;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.HandlesTypes;
-
+import com.sun.faces.config.FacesInitializer;
 import org.acme.sample.jsf.FacesViewScope;
 import org.apache.catalina.Context;
 import org.primefaces.util.Constants;
 import org.springframework.beans.factory.config.CustomScopeConfigurer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerFactory;
-import org.springframework.boot.context.embedded.ServletContextInitializer;
 import org.springframework.boot.context.embedded.tomcat.TomcatContextCustomizer;
 import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
-import org.springframework.boot.context.web.NonEmbeddedServletContainerFactory;
-import org.springframework.boot.context.web.SpringBootServletInitializer;
+import org.springframework.boot.web.servlet.ServletContextInitializer;
+import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
-import com.sun.faces.config.FacesInitializer;
+import javax.faces.application.ProjectStage;
+import javax.servlet.ServletContainerInitializer;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.HandlesTypes;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 @Configuration
 @ComponentScan
@@ -47,8 +43,7 @@ public class SpringBootFacesApplication extends SpringBootServletInitializer {
 	@Bean
 	public static CustomScopeConfigurer customScopeConfigurer() {
 		CustomScopeConfigurer configurer = new CustomScopeConfigurer();
-        configurer.setScopes(Collections.<String, Object>singletonMap(
-                FacesViewScope.NAME, new FacesViewScope()));
+        configurer.setScopes(Collections.<String, Object>singletonMap(FacesViewScope.NAME, new FacesViewScope()));
 		return configurer;
 	}
 	
@@ -57,7 +52,7 @@ public class SpringBootFacesApplication extends SpringBootServletInitializer {
 	    return new ServletContextInitializer() {
             @Override
             public void onStartup(ServletContext sc) throws ServletException {
-                sc.setInitParameter(Constants.ContextParams.THEME, "bootstrap");
+                //sc.setInitParameter(Constants.ContextParams.THEME, "bootstrap");
                 sc.setInitParameter(Constants.ContextParams.FONT_AWESOME, "true");
                 sc.setInitParameter(ProjectStage.PROJECT_STAGE_PARAM_NAME, ProjectStage.Development.name());
             }
@@ -68,7 +63,7 @@ public class SpringBootFacesApplication extends SpringBootServletInitializer {
 	 * This bean is only needed when running with embedded Tomcat.
 	 */
     @Bean
-    @ConditionalOnMissingBean(NonEmbeddedServletContainerFactory.class)
+    //@ConditionalOnMissingBean(NonEmbeddedServletContainerFactory.class)
     public EmbeddedServletContainerFactory embeddedServletContainerFactory() {
         TomcatEmbeddedServletContainerFactory tomcat = new TomcatEmbeddedServletContainerFactory();
         

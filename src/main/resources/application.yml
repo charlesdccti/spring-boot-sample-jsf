@@ -1,2 +1,6 @@
+
 management:
   context-path: /sysinfo
+
+server:
+  port: 11818

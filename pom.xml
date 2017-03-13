@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.2.3.RELEASE</version>
+        <version>1.5.1.RELEASE</version>
         <relativePath />
     </parent>   
 
@@ -15,16 +15,50 @@
     
 	<packaging>war</packaging>
 
+
 	<properties>
-        <!-- can be 8 also -->
-		<java.version>7</java.version>
-    
-        <!-- can be 8.0.x also -->
-        <tomcat.version>7.0.62</tomcat.version>
-        
+		<java.version>8</java.version>
+        <tomcat.version>8.5.6</tomcat.version>
         <jsf-mojarra.version>2.2.11</jsf-mojarra.version>
-        <primefaces.version>5.2</primefaces.version>
+        <primefaces.version>5.3</primefaces.version>
 	</properties>
+
+    <repositories>
+        <repository>
+            <id>primefaces</id>
+            <name>PrimeFaces</name>
+            <url>https://repository.primefaces.org/</url>
+        </repository>
+        <repository>
+            <id>mvn-public</id>
+            <name>MVNRepository</name>
+            <url>http://mvnrepository.com</url>
+        </repository>
+        <repository>
+            <id>spring-snapshots</id>
+            <name>Spring Snapshots</name>
+            <url>https://repo.spring.io/libs-snapshot-local</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/libs-milestone-local</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>spring-releases</id>
+            <name>Spring Releases</name>
+            <url>https://repo.spring.io/libs-release-local</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 	
 	<dependencies>
 		<dependency>
@@ -39,13 +73,13 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
-            <scope>provided</scope>
+            <!--<scope>provided</scope>-->
         </dependency>
         <!-- Jasper is needed for Mojarra -->      
         <dependency>
             <groupId>org.apache.tomcat.embed</groupId>
             <artifactId>tomcat-embed-jasper</artifactId>
-            <scope>provided</scope>
+            <!--<scope>provided</scope>-->
         </dependency>      
       
         <dependency>
@@ -59,15 +93,14 @@
             <version>${primefaces.version}</version>
         </dependency>
 
-        <!-- Repository: http://repository.primefaces.org/ -->      
-        <!-- include a custom theme jar -->
+        <!-- https://mvnrepository.com/artifact/org.primefaces.themes/bootstrap-->
         <dependency>
             <groupId>org.primefaces.themes</groupId>
             <artifactId>bootstrap</artifactId>
             <version>1.0.10</version>
         </dependency>
-	
-		<dependency>
+
+        <dependency>
 			<groupId>org.glassfish</groupId>
 			<artifactId>javax.faces</artifactId>
 			<version>${jsf-mojarra.version}</version>
