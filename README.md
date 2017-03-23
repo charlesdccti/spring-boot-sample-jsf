@@ -3,6 +3,10 @@ Spring Boot With JSF Sample
 
 * Shows how to configure JSF 2.2.x with Spring Boot 1.2.x on Servlet API 3.x
 
+### First
+
+* Clone this repository: `git clone ...`
+
 ### Running
 
 This setup can run in all possible ways:
